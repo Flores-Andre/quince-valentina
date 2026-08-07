@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-/* Pon esto en la primera línea de tu App.css */
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Delius&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-  overflow-x: hidden; /* Corta cualquier cosa que intente salirse por los lados */
+  overflow-x: hidden;
   width: 100%;
   position: relative;
 }
 
-/* Asegura que los márgenes no ensanchen los contenedores */
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
 :root {
   --wine: #2b1521;
   --wine-deep: #190d15;
@@ -78,24 +78,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--brass-light);
   border-radius: 50%;
   box-shadow: 0 0 8px 2px rgba(217,176,119,0.3);
-  animation: floatParticles linear infinite; /* 'linear' hace que suban a velocidad constante */
+  animation: floatParticles linear infinite;
 }
 
 @keyframes floatParticles {
-  0% {
-    transform: translateY(10vh) scale(0.5);
-    opacity: 0; /* Solo nacen invisibles para no aparecer de golpe */
-  }
-  10% {
-    opacity: 0.6; /* Aparecen rápido */
-  }
-  90% {
-    opacity: 0.6; /* Se mantienen visibles TODO el camino */
-  }
-  100% {
-    transform: translateY(-100vh) scale(1.2); /* Suben hasta salir de la pantalla */
-    opacity: 0; /* Desaparecen solo cuando ya están muy arriba */
-  }
+  0% { transform: translateY(10vh) scale(0.5); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
 }
 
 .hero-numeral {
@@ -135,16 +125,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .hero-date { 
-  color: #2b1810; /* El mismo café oscuro */
-  font-weight: bold; /* Letra gruesa */
-  border-color: rgba(43, 24, 16, 0.4); /* Oscurece también la línea de arriba y abajo */
+  color: #2b1810;
+  font-weight: bold;
+  border-color: rgba(43, 24, 16, 0.4);
 }
 
 .scroll-hint { margin-top: 3rem; color: var(--brass-light); font-size: 1.3rem; animation: bounce 2s infinite; }
 @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
 /* ===== COUNTDOWN ===== */
-.countdown-section { background: var(--wine-deep); padding: 4rem 1.5rem 5rem; }
+.countdown-section { background: var(--wine-deep); padding: 4rem 1.5rem 5rem; width: 100%; max-width: none; text-align: center; display: flex; flex-direction: column; align-items: center; background-color: #fdf2f1;}
 .countdown-section .eyebrow { margin-bottom: 2.2rem; }
 
 .countdown { display: flex; align-items: center; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
@@ -160,39 +150,61 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: 0.7rem; 
   letter-spacing: 3px; 
   text-transform: uppercase; 
-  color: #8c5a58; /* Tono vino para hacer juego con el título */
+  color: #8c5a58;
   margin-top: 8px;
   display: block;
 }
 .cd-divider { 
   width: 1px; 
   height: 2.4rem; 
-  background: rgba(140, 90, 88, 0.3); /* Rayita más suave en el mismo tono */
+  background: rgba(140, 90, 88, 0.3);
 }
 .today { font-family: var(--font-display); font-size: 1.4rem; color: var(--brass-light); letter-spacing: 2px; }
+
+.countdown-title {
+  font-family: 'Italiana', serif;
+  color: #8c5a58;
+  font-size: 1.6rem;
+  margin-bottom: 8px; 
+  letter-spacing: 2px;
+}
 
 /* ===== MESSAGE ===== */
 .message {
   width: 100%;
-  background: #fbeae7;   /* 👈 antes var(--ivory) */
+  /* El degradado hace la magia: empieza en crema y termina en el rosa de Detalles (#fbeae7) */
+  background: linear-gradient(to bottom, #fdf5ef 0%, #fbeae7 100%) !important;
   text-align: center;
-  padding: 2.5rem 1.8rem 3rem;
+  padding: 1rem 1.8rem 5rem !important;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .message-card {
-  background-color: #fdf5ef;              /* mismo tono que el pergamino */
-  border: 1px solid #e8cfa8;              /* mismo borde dorado */
-  border-radius: 4px;                     /* mismo radius que el pergamino (antes tenías 6px) */
-  padding: 45px 40px 40px;                /* mismo padding */
+  background-color: #ffffff; /* Blanco puro para que resalte sobre el rosa */
+  border: 1px solid #e8cfa8;
+  border-radius: 4px;
+  padding: 45px 40px 40px;
   max-width: 480px;
   width: 90%;
   margin: 0 auto;
-  box-shadow: 0 15px 35px rgba(196, 154, 90, 0.25); /* misma sombra dorada */
+  box-shadow: 0 15px 35px rgba(196, 154, 90, 0.15); /* Sombra un poco más suave */
   position: relative;
+
+  outline: 1px solid rgba(217, 176, 119, 0.45);
+  outline-offset: -8px;
 }
-/* Misma línea decorativa que .pergamino-titulo::after, pero arriba de la tarjeta */
+/* Estilo para el nuevo título */
+.message-title {
+  font-family: var(--font-display); /* Usa tu fuente elegante Italiana */
+  font-size: 1.5rem;
+  color: var(--brass); /* El color doradito */
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 .message-card::before {
   content: "";
   position: absolute;
@@ -205,9 +217,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .message-card p {
-  font-family: 'Cormorant Garamond', serif;  /* misma fuente que .pergamino-texto */
+  font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
-  color: #6b5b4f;                             /* mismo color café que el pergamino */
+  color: #6b5b4f;
   line-height: 1.7;
   margin: 0;
   opacity: 1;
@@ -221,58 +233,59 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 3rem 1.5rem 5rem;
   position: relative;
 }
-.detail-row.reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
+.detail-row.reveal { opacity: 1; transform: translateY(0); }
 .details::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--brass), transparent);
+    left: 8% !important;
+    transform: none !important;
+    width: 60px !important;
+    height: 100% !important; /* Anula los 2px de la línea vieja */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 143' fill='none'%3E%3Cpath d='M34 143C34 143 34 85 2 45C2 45 42 65 34 143Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 120C34 120 45 80 65 60C65 60 40 70 34 120Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 95C34 95 20 60 5 40C5 40 25 55 34 95Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 143 V 0' stroke='%23d9b077' stroke-width='1.5'/%3E%3C/svg%3E") top center / 40px repeat-y !important;
+    opacity: 0.35 !important;
+  left: 8%;
+    
+    /* 👇 La cura: limpiamos la línea horizontal del móvil 👇 */
+    transform: none;
+    background: none; 
+    
+    /* Y le volvemos a inyectar la imagen de la enredadera por si acaso */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 143' fill='none'%3E%3Cpath d='M34 143C34 143 34 85 2 45C2 45 42 65 34 143Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 120C34 120 45 80 65 60C65 60 40 70 34 120Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 95C34 95 20 60 5 40C5 40 25 55 34 95Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 143 V 0' stroke='%23d9b077' stroke-width='1.5'/%3E%3C/svg%3E");
 }
-.details .eyebrow {
-  color: var(--plum); /* en vez del brass-light actual, un rosa mauve */
-}
+.details .eyebrow { color: var(--plum); }
 
 .detail-row {
   max-width: 640px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 130px 1fr auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   align-items: center;
-  gap: 1rem;
-  padding: 2rem 0;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
   border-top: 1px solid rgba(43, 21, 33, 0.1);
 }
-
-.detail-row:last-child {
-  border-bottom: 1px solid rgba(43, 21, 33, 0.1);
+.detail-row > *:first-child {
+  text-align: center !important;
+  width: 100%;
 }
+.detail-row:last-child { border-bottom: 1px solid rgba(43, 21, 33, 0.1); }
 .detail-link {
   font-size: 0.8rem;
   color: var(--brass);
   border-bottom: 1px solid var(--brass);
   white-space: nowrap;
   text-decoration: none;
-  display: inline-block;   /* 👈 esto es la clave */
-  width: fit-content;      /* 👈 refuerzo, por si acaso */
+  display: inline-block;
+  width: fit-content;
 }
+
 .map-container {
   margin-top: 1rem;
   border-radius: 8px;
-  overflow: hidden;           /* recorta el iframe a las esquinas redondeadas */
-  border: 1px solid #e8cfa8;  /* mismo dorado sutil del resto del sitio */
+  overflow: hidden;
+  border: 1px solid #e8cfa8;
   box-shadow: 0 8px 20px rgba(196, 154, 90, 0.15);
 }
-
-.map-container iframe {
-  display: block;
-}
+.map-container iframe { display: block; }
 .detail-label {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -282,28 +295,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .detail-body p { font-size: 0.92rem; color: var(--ink); margin-bottom: 0.2rem; }
 .detail-address { opacity: 0.62; font-size: 0.85rem; }
-.detail-link {
-  font-size: 0.8rem;
-  color: var(--brass);
-  border-bottom: 1px solid var(--brass);
-  white-space: nowrap;
-  text-decoration: none;
-}
-.palette {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 12px;   /* 👈 nuevo, los separa del texto de arriba */
-}
+
+.palette { display: flex; gap: 0.4rem; margin-top: 12px; }
 .palette span { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
 .palette span:nth-child(1) { background: var(--brass); }
 .palette span:nth-child(2) { background: var(--plum); }
 .palette span:nth-child(3) { background: var(--wine); }
 
-@media (max-width: 560px) {
-  .detail-label {
-    margin-bottom: 0.3rem;
-  }
-}
 /* ===== RSVP ===== */
 .rsvp {
   width: 100%;
@@ -311,37 +309,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   color: #4a3520;
   text-align: center;
   padding: 5rem 1.5rem;
+  position: relative;
 }
-.rsvp .eyebrow { 
-  margin-bottom: 0.8rem; 
-  color: #7a5a30;              /* 👈 NUEVO: antes heredaba brass-light, ahora más oscuro para fondo claro */
-}
-.rsvp-sub { 
-  font-size: 0.85rem; 
-  opacity: 0.85;                /* 👈 cambiado (antes 0.65) */
-  margin-bottom: 2.6rem; 
-  color: #7a5a30;               /* 👈 NUEVO */
-}
+.rsvp .eyebrow { margin-bottom: 0.8rem; color: #7a5a30; }
+.rsvp-sub { font-size: 0.85rem; opacity: 0.85; margin-bottom: 2.6rem; color: #7a5a30; }
 
 .rsvp-form { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
-
 .field { text-align: left; }
 .field label {
   display: block;
   font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #7a5a30;                /* 👈 cambiado (antes var(--brass-light)) */
-  opacity: 0.9;                   /* 👈 cambiado (antes 0.85) */
+  color: #7a5a30;
+  opacity: 0.9;
   margin-bottom: 0.5rem;
 }
-
 .field input, .field textarea {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(74, 53, 32, 0.35);   /* 👈 cambiado (antes rgba(245,236,220,0.35)) */
-  color: #4a3520;                                     /* 👈 cambiado (antes var(--ivory)) */
+  border-bottom: 1px solid rgba(74, 53, 32, 0.35);
+  color: #4a3520;
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 0.45rem 0.1rem;
@@ -356,19 +345,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding-bottom: 0.4rem;
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: rgba(74, 53, 32, 0.5);    /* 👈 cambiado (antes rgba(245,236,220,0.5)) */
+  color: rgba(74, 53, 32, 0.5);
   border-bottom: 1px solid transparent;
   cursor: pointer;
   transition: color 0.25s, border-color 0.25s;
 }
-.toggle-option.active { 
-  color: #4a3520;                  /* 👈 cambiado (antes var(--brass-light)) */
-  border-bottom-color: var(--brass); 
-}
+.toggle-option.active { color: #4a3520; border-bottom-color: var(--brass); }
+
 .submit-btn {
   margin-top: 0.5rem;
   background: var(--brass);
-  color: #fff;                     /* 👈 cambiado (antes var(--wine-deep), que se perdería sobre el brass) */
+  color: #fff;
   border: none;
   padding: 1rem;
   font-family: var(--font-body);
@@ -426,7 +413,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 100%;
   background: var(--wine-deep);
   text-align: center;
-  padding: 2rem 1.5rem;   /* 👈 antes 3.5rem 1.5rem 3rem, ahora más compacto */
+  padding: 2rem 1.5rem;
 }
 .footer-numeral {
   font-family: var(--font-display);
@@ -434,7 +421,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   color: var(--brass);
   opacity: 0.5;
   letter-spacing: 3px;
-  margin-bottom: 0.6rem;   /* 👈 antes 1rem */
+  margin-bottom: 0.6rem;
 }
 .footer-text { font-size: 0.85rem; color: var(--ivory); opacity: 0.6; }
 .footer-name {
@@ -443,22 +430,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--brass-light);
-  margin-top: 0.2rem;   /* 👈 antes 0.3rem */
+  margin-top: 0.2rem;
 }
+
 /* =========================================
    PANTALLA DE BIENVENIDA (ESTILO ROMÁNTICO)
    ========================================= */
-
 .welcome-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  /* Color base por si no carga la imagen */
-  background-color: #eabfb9; 
-  /* 👇 Asegúrate de tener esta imagen en tu carpeta assets 👇 */
-  background-image: url('./assets/fondo-floral.webp'); 
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background-color: #eabfb9;
+  background-image: url('./assets/fondo-floral.webp');
   background-size: cover;
   background-position: center;
   z-index: 9999;
@@ -475,31 +458,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   flex-direction: column;
   align-items: center;
 }
-/* =========================================
-   TEXTO ARRIBA: "Mis 15 años"
-   ========================================= */
+
 .welcome-subtitle {
   font-family: 'Delius', cursive; 
   font-size: 3.5rem;
   color: #5c3a21;
   font-weight: bold;
-  
-  /* 👇 Esto mueve SOLO este texto hacia abajo, como si flotara 👇 */
   transform: translateY(40px); 
 }
 
-/* =========================================
-   TEXTO ABAJO: "Valentina"
-   ========================================= */
 .welcome-name {
   font-family: 'Alex Brush', cursive; 
   font-size: 6.5rem;
   color: #5c3a21;
   font-weight: normal;
-  
-  /* 👇 Haz este número negativo para subir a Valentina en el celular 👇 */
   margin-top: -40px; 
-  
   margin-bottom: 25px;
 }
 
@@ -510,24 +483,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: bold; 
   letter-spacing: 3px; 
   margin-bottom: 1rem;
-
-  /* 👇 Le aplicas el mismo valor para que bajen juntos 👇 */
   transform: translateY(40px); 
 }
 
 .envelope-image {
   width: 550px; 
   max-width: 95vw; 
-  
-  /* 👇 Borra la línea de cursor: pointer; que estaba por aquí 👇 */
-  
   filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.2));
   animation: float-envelope 3s ease-in-out infinite;
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
-/* Botón elegante estilo boceto */
 .open-btn-elegant {
   background: rgba(255, 255, 255, 0.4);
   color: #5c3a21;
@@ -542,26 +509,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   margin-top: -30px; 
 }
+.open-btn-elegant:hover { background: rgba(255, 255, 255, 0.8); box-shadow: 0 6px 12px rgba(92, 58, 33, 0.15); }
 
-/* Efecto al pasar el mouse (sin saltos ni movimientos raros) */
-.open-btn-elegant:hover {
-  background: rgba(255, 255, 255, 0.8); /* Se aclara un poquito más */
-  box-shadow: 0 6px 12px rgba(92, 58, 33, 0.15); /* Solo cambia la sombra */
-}
-
-/* Animación de flotación suave para el sobre */
 @keyframes float-envelope {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
+
 /* ===== ESTILOS DE LA PANTALLA ABIERTA ===== */
 .opened-screen {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* 👇 Este color rosado camuflará los bordes si sobra espacio en PC 👇 */
   background-color: #dfb9b8; 
 }
 
@@ -571,42 +532,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Evita que el fondo borroso se salga */
+  overflow: hidden;
   background-color: #dfb9b8;
 }
-/* En celular ocultamos el fondo borroso porque la imagen ya llena la pantalla */
-.portada-fondo-blur {
-  display: none; 
-}
+.portada-fondo-blur { display: none; }
 
 .full-screen-image {
   position: relative;
-  z-index: 1; /* Mantiene la carta por encima de todo */
+  z-index: 1;
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* ===== SECCIÓN DEL CONTADOR ===== */
-.countdown-section {
-  width: 100%;
-  max-width: none; /* 🔥 ESTA ES LA CLAVE: Deja que el fondo oscuro fluya hasta los bordes de la pantalla 🔥 */
-  padding: 10px 15px 25px; 
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fdf2f1;
-}
-
-.countdown-title {
-  font-family: 'Italiana', serif; /* O la fuente que estés usando */
-  color: #8c5a58;
-  font-size: 1.6rem;
-  /* 👇 Achicamos este margen para que "Faltan" quede pegadito a los números 👇 */
-  margin-bottom: 8px; 
-  letter-spacing: 2px;
-}
 .seccion-princesa {
   width: 100%;
   display: flex;
@@ -624,16 +562,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: block;
   mix-blend-mode: multiply;
 }
-.ceremonia-info {
-  display: flex;
-  align-items: center;
-  gap: 1rem;              /* ya centralizado aquí */
-}
 
-.ceremonia-texto {
-  flex: 0 1 auto;            /* el texto no se estira, el mapa queda pegado a su lado */
-  min-width: 0;
-}
+.ceremonia-info { display: flex; align-items: center; gap: 1rem; }
+.ceremonia-texto { flex: 0 1 auto; min-width: 0; }
 
 .map-thumbnail {
   display: block;
@@ -646,22 +577,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 4px 10px rgba(196, 154, 90, 0.15);
   position: relative;
 }
-
 .map-thumbnail iframe {
   width: 260px;
   height: 260px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.separador-decorativo .separador-icono {
-  width: 22px;
-  height: 22px;
-  margin: 0 16px;
-  color: var(--brass);
-}
+
 .separador-decorativo {
   width: 100%;
   display: flex;
@@ -670,6 +594,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 25px 0;
   background-color: #fdf2f1;
 }
+.separador-decorativo .separador-icono { width: 22px; height: 22px; margin: 0 16px; color: var(--brass); }
 .separador-decorativo::before,
 .separador-decorativo::after {
   content: "";
@@ -677,80 +602,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   width: 70px;
   background: linear-gradient(to right, transparent, var(--brass), transparent);
 }
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-}
-/* ===== ADAPTACIÓN PARA PC Y LAPTOPS ===== */
-@media (min-width: 1024px) {
-  .countdown-section {
-    padding: 60px 20px; /* Recupera el espacio solo en computadora */
-  }
-  
-  .countdown-title {
-    font-size: 2.2rem; 
-    margin-bottom: 20px;
-  }
-  .seccion-princesa {
-  margin-bottom: 0;
-  background-color: #fdf2f1
-}
- .ceremonia-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
 
-  .map-thumbnail iframe {
-    width: 100%;
-    height: 260px;
-  }
-  .pergamino-container {
-  position: absolute;
-  bottom: -50px;
-  left: 40px;
-  width: 40%;
-  max-width: 480px;
-  min-width: 300px;
-  background-color: #fdf5ef;
-  padding: 45px 40px 40px;
-  text-align: center;
-  border-radius: 4px;
-  box-shadow: 0 15px 35px rgba(196, 154, 90, 0.25);
-  border: 1px solid #e8cfa8;
-  z-index: 2;
-}
-
-.pergamino-titulo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.1rem;
-  color: #c9a15a;
-  margin: 0 0 18px 0;
-  font-weight: 400;
-  letter-spacing: 1px;
-  position: relative;
-  padding-bottom: 15px;
-}
-
-.pergamino-titulo::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #c9a15a, transparent);
-}
-
-.pergamino-texto {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  color: #6b5b4f;
-  line-height: 1.7;
-  margin: 0;
-}
-/* Diseño por defecto: Uno al lado del otro (para iPhone 14 y celulares modernos) */
 .vestimenta-layout {
   display: flex;
   align-items: center;
@@ -760,92 +612,104 @@ html, body {
   text-align: left;
 }
 
-/* Solo se apilan si la pantalla es muy pequeña (menos de 390px) */
-@media (max-width: 385px) {
-  .vestimenta-layout {
-    flex-direction: column;
+.seccion-corona { position: relative; width: 100%; margin: 0; background-color: #fdf2f1; }
+.img-corona { width: 100%; height: auto; display: block; object-fit: cover; max-height: 750px; }
+
+
+/* ======= SECCIÓN AGRADECIMIENTOS (ESTILOS GLOBALES - RESCATADOS) ======= */
+.agradecimientos {
+  width: 100%;
+  background: #fdf5ef !important; /* Color crema sólido constante */
+  text-align: center;
+  /* Reducimos el padding inferior para que se conecte mejor con el mensaje */
+  padding: 4rem 1.8rem 2rem !important; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Indispensable para que los decorativos se anclen aquí */
+}
+.agradecimientos-bloque { max-width: 500px; margin: 0 auto; text-align: center; }
+.agradecimientos-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--plum);
+  margin-bottom: 1.2rem;
+}
+.agradecimientos-nombres {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--brass);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+.agradecimientos-padrinos { font-size: 1.15rem; line-height: 2; }
+.agradecimientos-y { font-size: 1rem; color: var(--plum); opacity: 0.7; }
+.agradecimientos-frase {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: #6b5b4f;
+  line-height: 1.75;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.agradecimientos-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--brass), transparent);
+  margin: 3rem auto;
+}
+
+/* ===== AJUSTES PARA PANTALLAS CHICAS ===== */
+@media (max-width: 560px) {
+  .detail-row { 
+    grid-template-columns: 1fr; 
     text-align: center;
-  }
-}
-}
-/* =========================================
-   TAMAÑOS ESPECÍFICOS PARA COMPUTADORA (Y LAPTOPS)
-   ========================================= */
-@media (min-width: 768px) {
- @media (min-width: 768px) {
-  .envelope-image {
-    width: clamp(500px, 45vw, 850px); 
-  }
-
-  .welcome-subtitle {
-    font-size: clamp(2.5rem, 3.5vw, 3.5rem); 
-    transform: translateY(10vh);
+    gap: 1.5rem;
   }
   
-  .welcome-date-elegant {
-    transform: translateY(10vh); 
-  }
-
-  .welcome-name {
-    font-size: clamp(4.5rem, 7vw, 6.5rem); 
-    transform: translateY(-8vh);
-  }
-
-  .open-btn-elegant {
-    transform: translateY(-8vh); 
-  }
-
-  .portada-container {
-    height: 85vh;
-  }
-
-  .portada-fondo-blur {
-    display: block;
-    position: absolute;
-    top: -20px; left: -20px; right: -20px; bottom: -20px;
-    background-size: cover;
-    background-position: center;
-    filter: blur(15px) brightness(0.8); 
-    z-index: 0;
-  }
-
-  .full-screen-image {
-    height: 90%;
-    width: auto; 
-    max-width: 100%;
-    object-fit: contain;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-    border-radius: 6px; 
-  }
-
-  .countdown-section {
-    padding: 60px 20px;
+  .detail-label { 
+    margin-bottom: 0; 
   }
   
-  .countdown-title {
-    font-size: 2.2rem; 
-    margin-bottom: 20px;
+  /* Centra los botones de Damas y Varones */
+  .rsvp-toggle {
+    justify-content: center !important;
   }
-} /* 👈 SE CIERRA AQUÍ, DE VERDAD */
+}
+@media (max-width: 420px) {
+  .vestimenta-layout { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 1rem;
+  }
+  
+  .vestimenta-layout div {
+    text-align: center !important;
+  }
+  
+  /* Centra las bolitas de colores de la paleta */
+  .palette {
+    justify-content: center;
+  }
+  .message-card {
+    padding: 30px 20px 25px !important; /* Le quitamos "gordura" a los lados de la tarjeta */
+  }
 
-/* ===== SECCIÓN 4: LA CORONA Y EL PERGAMINO (ahora global, mobile-first) ===== */
-
-.seccion-corona {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  background-color: #fdf2f1;
+  .message-title {
+    font-size: 1.2rem !important; /* Achicamos ligeramente el título */
+    letter-spacing: 1px !important; /* Juntamos un poquito más las letras */
+    overflow-wrap: break-word; /* Si la palabra sigue siendo inmensa, la obliga a bajar en vez de salirse */
+  }
 }
 
-.img-corona {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  max-height: 750px;
+@media (max-width: 385px) {
+  .vestimenta-layout { flex-direction: column; text-align: center; }
 }
 
-/* Ajustes solo para móvil */
 @media (max-width: 768px) {
   .pergamino-container {
     width: 85%;
@@ -856,12 +720,121 @@ html, body {
     padding: 35px 25px 30px;
     background-color: var(--ivory);
   }
+  .pergamino-titulo { font-size: 1.7rem; }
+  .seccion-corona { margin-bottom: 0; }
+}
 
-  .pergamino-titulo {
-    font-size: 1.7rem;
+/* =========================================
+   ADAPTACIÓN PARA PC Y LAPTOPS
+   ========================================= */
+@media (min-width: 768px) {
+  .envelope-image { width: clamp(500px, 45vw, 850px); }
+  .welcome-subtitle { font-size: clamp(2.5rem, 3.5vw, 3.5rem); transform: translateY(10vh); }
+  .welcome-date-elegant { transform: translateY(10vh); }
+  .welcome-name { font-size: clamp(4.5rem, 7vw, 6.5rem); transform: translateY(-8vh); }
+  .open-btn-elegant { transform: translateY(-8vh); }
+  .portada-container { height: 85vh; }
+  .portada-fondo-blur {
+    display: block;
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) brightness(0.8); 
+    z-index: 0;
+  }
+  .full-screen-image {
+    height: 90%;
+    width: auto; 
+    max-width: 100%;
+    object-fit: contain;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    border-radius: 6px; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .countdown-section { padding: 60px 20px; }
+  .countdown-title { font-size: 2.2rem; margin-bottom: 20px; }
+  .seccion-princesa { margin-bottom: 0; background-color: #fdf2f1; }
+  .ceremonia-info { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .map-thumbnail iframe { width: 100%; height: 260px; }
+  .detail-row {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    align-items: center;
+    text-align: left;
+    gap: 1rem;
+    padding: 2rem 0;
   }
 
-  .seccion-corona {
-    margin-bottom: 60px;
+  .detail-row > *:first-child {
+    text-align: left !important;
+    width: auto;
   }
-}}
+  /* ======= DECORATIVOS LATERALES (SOLO PARA PANTALLAS GRANDES) ======= */
+@media (min-width: 1024px) {
+  
+  /* 1. Forzamos el posicionamiento en las secciones con enredaderas (incluyendo rsvp) */
+  .seccion-corona,
+  .seccion-princesa,
+  .separador-decorativo,
+  .agradecimientos,
+  .message,
+  .details,
+  .rsvp {
+    position: relative !important;
+  }
+
+  /* 2. Dibujamos las enredaderas incluyendo .rsvp (y quitando el footer) */
+  .seccion-corona::before, .seccion-corona::after,
+  .seccion-princesa::before, .seccion-princesa::after,
+  .separador-decorativo::before, .separador-decorativo::after,
+  .agradecimientos::before, .agradecimientos::after,
+  .message::before, .message::after,
+  .details::before, .details::after,
+  .rsvp::before, .rsvp::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 60px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 143' fill='none'%3E%3Cpath d='M34 143C34 143 34 85 2 45C2 45 42 65 34 143Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 120C34 120 45 80 65 60C65 60 40 70 34 120Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 95C34 95 20 60 5 40C5 40 25 55 34 95Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 143 V 0' stroke='%23d9b077' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+    background-repeat: repeat-y !important;
+    background-size: 40px !important;
+    background-position: top center !important;
+    opacity: 0.35 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* 3. Lado Izquierdo */
+  .seccion-corona::before,
+  .seccion-princesa::before,
+  .separador-decorativo::before,
+  .agradecimientos::before,
+  .message::before,
+  .details::before,
+  .rsvp::before {
+    left: 8% !important;
+  }
+
+  /* 4. Lado Derecho (Espejo) */
+  .seccion-corona::after,
+  .seccion-princesa::after,
+  .separador-decorativo::after,
+  .agradecimientos::after,
+  .message::after,
+  .details::after,
+  .rsvp::after {
+    right: 8% !important;
+    transform: scaleX(-1) !important;
+  }
+
+  /* 5. Asegurar que los elementos del formulario queden por encima */
+  .rsvp > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+}

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import emailjs from '@emailjs/browser';
+
+const LIMITE_INVITADOS = 160;
 
 const RSVPForm = () => {
   const [name, setName] = useState('');
@@ -15,13 +17,44 @@ const RSVPForm = () => {
   });
   
   const [errorMessage, setErrorMessage] = useState('');
+  
+  // Nuevos estados para controlar el cupo
+  const [cupoLleno, setCupoLleno] = useState(false);
+  const [verificandoCupo, setVerificandoCupo] = useState(true);
 
-const handleSubmit = async (e) => {
+  // Verificar el cupo al cargar el componente
+  useEffect(() => {
+    const verificarCupo = async () => {
+      try {
+        const { data, error } = await supabase.rpc('get_total_confirmados');
+        if (!error && data >= LIMITE_INVITADOS) {
+          setCupoLleno(true);
+        }
+      } catch (error) {
+        console.error("Error al verificar cupo:", error);
+      } finally {
+        setVerificandoCupo(false);
+      }
+    };
+    verificarCupo();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
     setErrorMessage('');
 
     try {
+      // Verificación final antes de enviar (evita que se pase del límite si 2 envían al mismo tiempo)
+      const { data: totalActual, error: errorConteo } = await supabase.rpc('get_total_confirmados');
+      
+      if (!errorConteo && attending === 'si' && (totalActual + guests) > LIMITE_INVITADOS) {
+        setStatus('error');
+        setErrorMessage('Lo sentimos, el cupo de invitados ya se ha completado.');
+        setCupoLleno(true);
+        return;
+      }
+
       const formData = {
         name: name.trim(),
         email: email.trim(),
@@ -47,26 +80,26 @@ const handleSubmit = async (e) => {
         return;
       }
 
-    localStorage.setItem('rsvp_submitted', 'true');
+      localStorage.setItem('rsvp_submitted', 'true');
 
-    if (attending === 'si' && email.trim() !== '') {
-      try {
-        await emailjs.send(
-          'service_h3osboe',
-          'template_kvsyz7m',
-          {
-            to_name: name.trim(),
-            to_email: email.trim(),
-            guests: guests,
-          },
-          'rvi77d8S6R7URFq7J'
-        );
-      } catch (emailError) {
-        console.error("Error al enviar el correo de confirmación:", emailError);
+      if (attending === 'si' && email.trim() !== '') {
+        try {
+          await emailjs.send(
+            'service_h3osboe',
+            'template_kvsyz7m',
+            {
+              to_name: name.trim(),
+              to_email: email.trim(),
+              guests: guests,
+            },
+            'rvi77d8S6R7URFq7J'
+          );
+        } catch (emailError) {
+          console.error("Error al enviar el correo de confirmación:", emailError);
+        }
       }
-    }
 
-setStatus('success');
+      setStatus('success');
 
     } catch (error) {
       console.error("Error inesperado:", error);
@@ -75,6 +108,25 @@ setStatus('success');
     }
   };
 
+  // Mientras verifica el cupo, no mostramos nada para evitar parpadeos
+  if (verificandoCupo) {
+    return null; 
+  }
+
+  // Si el cupo está lleno, mostramos el mensaje de agotado usando las clases de éxito para que se vea bonito
+  if (cupoLleno && status !== 'success') {
+    return (
+      <div className="rsvp-success">
+        <p>Cupo completo</p>
+        <p className="success-sub">
+          Lo sentimos, hemos alcanzado el límite de invitados para este evento. 
+          Gracias por tu interés en acompañarnos.
+        </p>
+      </div>
+    );
+  }
+
+  // Pantalla de éxito tras confirmar
   if (status === 'success') {
     return (
       <div className="rsvp-success">
@@ -84,6 +136,7 @@ setStatus('success');
     );
   }
 
+  // Tu formulario original intacto
   return (
     <form className="rsvp-form" onSubmit={handleSubmit}>
       <div className="field">
