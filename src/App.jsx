@@ -11,6 +11,8 @@ import musicaFondo from './assets/musica-fondo.mp3';
 import marcoAuroraImg from './assets/marco-aurora.jpg';
 import nombreValentinaImg from './assets/nombre-valentina-3d.jpg';
 import coronaPrincesaImg from './assets/corona-princesa.jpg';
+import cajaRegaloImg from './assets/caja-regalo.png';
+
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -275,7 +277,25 @@ function App() {
               </div>
             </div>
           </section>
+        
+          {/* Sección de regalos */}
+          <section className="regalos">
+            <div className="regalos-content">
+              <h2 className="regalos-titulo">Un detalle para celebrar juntos</h2>
+                <p className="regalos-subtitulo">
+                Como parte de esta celebración, agradeceré mucho contar con un regalo de tu parte.
+              </p>
+            
 
+              <div className="regalo-destacado">
+                <div className="resplandor-divino"></div>
+                <img src={cajaRegaloImg} alt="Caja de regalo" className="regalo-caja-img" />
+                
+              </div>
+            </div>
+          </section>
+
+      
           {/* RSVP */}
           <section className="rsvp">
             <p className="eyebrow">Confirma tu Asistencia</p>

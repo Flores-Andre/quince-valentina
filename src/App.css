@@ -662,6 +662,148 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: linear-gradient(to right, transparent, var(--brass), transparent);
   margin: 3rem auto;
 }
+/* ESTO APLICA PARA TODOS LOS DISPOSITIVOS (Móvil y PC) */
+/* ESTO APLICA PARA TODOS LOS DISPOSITIVOS (Móvil y PC) */
+.regalos {
+  position: relative;
+  width: 100%;
+  
+  /* AQUÍ EDITAS EL COLOR */
+  background: linear-gradient(180deg, #f4dad3 50%, #fbeae7 100%) !important;
+  
+  text-align: center;
+  padding: 6rem 1.8rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ----- MARCOS LATERALES CON TU SVG BOTÁNICO ----- */
+.regalos::before,
+.regalos::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40px; /* Ajustado al tamaño de tu SVG */
+  opacity: 0.8; /* Un poco de opacidad para que se vea elegante */
+  display: none; /* Ocultos en celular */
+  z-index: 1;
+
+  /* Tu código SVG inyectado */
+  content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 60px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 143' fill='none'%3E%3Cpath d='M34 143C34 143 34 85 2 45C2 45 42 65 34 143Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 120C34 120 45 80 65 60C65 60 40 70 34 120Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 95C34 95 20 60 5 40C5 40 25 55 34 95Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 143 V 0' stroke='%23d9b077' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+    background-repeat: repeat-y !important;
+    background-size: 40px !important;
+    background-position: top center !important;
+    opacity: 0.35 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+.regalos::before {
+  left: 122px; /* Separación del borde izquierdo */
+}
+
+.regalos::after {
+  right: 122px; /* Separación del borde derecho */
+  transform: scaleX(-1); /* Hace efecto espejo para que las hojas miren hacia adentro */
+}
+
+/* ======= ¡AQUÍ ESTÁ EL @MEDIA! ======= */
+/* Solo esto va dentro, para prender los marcos en PC */
+@media (min-width: 1024px) {
+  .regalos::before,
+  .regalos::after {
+    display: block; 
+  }
+}
+/* ===================================== */
+
+/* ----- CONTENIDO PRINCIPAL Y TEXTOS ----- */
+.regalos-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.regalos-titulo {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--brass);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.regalos-subtitulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: #6b5b4f;
+  margin: 0 auto -2rem;
+  line-height: 1.6;
+}
+
+.regalos-subtitulo::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 1px;
+  background-color: var(--brass);
+  margin: 2rem auto 0;
+  opacity: 0.5;
+}
+
+/* ----- MAGIA DE LA CAJA DE REGALO ----- */
+.regalo-destacado {
+  position: relative;
+  display: inline-block;
+  padding: 2rem;
+  cursor: default;
+}
+
+.resplandor-divino {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 65%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.regalo-caja-img {
+  position: relative;
+  z-index: 1;
+  width: 560px; /* Tamaño imponente */
+  height: auto;
+  margin-bottom: 1.5rem;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.regalo-destacado:hover .regalo-caja-img {
+  transform: scale(1.08) translateY(-8px);
+}
+
+.regalo-etiqueta {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--plum); /* Contraste perfecto */
+  font-weight: 700;
+}
 
 /* ===== AJUSTES PARA PANTALLAS CHICAS ===== */
 @media (max-width: 560px) {
@@ -836,5 +978,70 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     position: relative;
     z-index: 2;
   }
+  @media (min-width: 1024px) {
+  
+  /* 1. Forzamos el posicionamiento en las secciones con enredaderas (incluyendo rsvp) */
+  .seccion-corona,
+  .seccion-princesa,
+  .separador-decorativo,
+  .agradecimientos,
+  .message,
+  .details,
+  .rsvp {
+    position: relative !important;
+  }
+
+  /* 2. Dibujamos las enredaderas incluyendo .rsvp (y quitando el footer) */
+  .seccion-corona::before, .seccion-corona::after,
+  .seccion-princesa::before, .seccion-princesa::after,
+  .separador-decorativo::before, .separador-decorativo::after,
+  .agradecimientos::before, .agradecimientos::after,
+  .message::before, .message::after,
+  .details::before, .details::after,
+  .rsvp::before, .rsvp::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 60px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 143' fill='none'%3E%3Cpath d='M34 143C34 143 34 85 2 45C2 45 42 65 34 143Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 120C34 120 45 80 65 60C65 60 40 70 34 120Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 95C34 95 20 60 5 40C5 40 25 55 34 95Z' stroke='%23d9b077' stroke-width='1.5'/%3E%3Cpath d='M34 143 V 0' stroke='%23d9b077' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+    background-repeat: repeat-y !important;
+    background-size: 40px !important;
+    background-position: top center !important;
+    opacity: 0.35 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* 3. Lado Izquierdo */
+  .seccion-corona::before,
+  .seccion-princesa::before,
+  .separador-decorativo::before,
+  .agradecimientos::before,
+  .message::before,
+  .details::before,
+  .rsvp::before {
+    left: 8% !important;
+  }
+
+  /* 4. Lado Derecho (Espejo) */
+  .seccion-corona::after,
+  .seccion-princesa::after,
+  .separador-decorativo::after,
+  .agradecimientos::after,
+  .message::after,
+  .details::after,
+  .rsvp::after {
+    right: 8% !important;
+    transform: scaleX(-1) !important;
+  }
+
+  /* 5. Asegurar que los elementos del formulario queden por encima */
+  .rsvp > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
 }
 }
