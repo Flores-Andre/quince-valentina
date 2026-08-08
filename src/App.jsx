@@ -11,7 +11,7 @@ import musicaFondo from './assets/musica-fondo.mp3';
 import marcoAuroraImg from './assets/marco-aurora.jpg';
 import nombreValentinaImg from './assets/nombre-valentina-3d.jpg';
 import coronaPrincesaImg from './assets/corona-princesa.jpg';
-import cajaRegaloImg from './assets/caja-regalo.png';
+import cajaRegaloImg from './assets/caja-regalo.webp';
 
 
 function App() {
